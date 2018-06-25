@@ -8,11 +8,18 @@ const state = {
 
 const actions = {
   FETCH_SEARCH_RESULTS: ({ commit }, { query }) => {
+    if (!query) {
+      commit('SET_SEARCH_RESULTS', [])
+      return
+    }
+
     return new Promise((resolve, reject) => {
       return api.search({ query })
-        .then((results) => {
-          commit('SET_SEARCH_RESULTS', results)
-          resolve(results)
+        .then((response) => {
+          const { items } = response
+
+          commit('SET_SEARCH_RESULTS', items)
+          resolve(items)
         })
         .catch(error => reject(error))
     })
@@ -26,6 +33,7 @@ const mutations = {
 }
 
 export default {
+  namespaced,
   state,
   actions,
   mutations
