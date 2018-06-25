@@ -4,6 +4,7 @@
       class="search-box__input"
       type="search"
       :placeholder="placeholder"
+      @input="onQueryChange"
     />
     <button
       class="search-box__submit"
@@ -19,6 +20,12 @@ export default {
     placeholder: {
       type: String,
       default: 'Type to find...'
+    }
+  },
+
+  methods: {
+    onQueryChange(event) {
+      this.$emit('input', event.currentTarget.value)
     }
   }
 }
