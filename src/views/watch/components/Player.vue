@@ -18,12 +18,12 @@ export default {
   props: {
     videoId: {
       type: String,
-      required: true,
+      required: true
     }
   },
 
   computed: {
-    videoSrc() {
+    videoSrc () {
       return `https://www.youtube.com/embed/${this.videoId}`
     }
   }

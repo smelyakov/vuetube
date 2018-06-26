@@ -8,8 +8,8 @@
     </div>
     <div class="watch__content">
       <section class="watch__info">
-        <h1 class="watch__title">Video Title</h1>
-        <h1 class="watch__views">100 просмотров</h1>
+        <h1 class="watch__title">{{ info.title }}</h1>
+        <h1 class="watch__views">{{ statistics.viewCount }} просмотров</h1>
       </section>
       <section class="watch__comments"></section>
       <aside class="watch__related"></aside>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import SearchBox from '@/components/SearchBox'
 import Player from './components/Player'
 
@@ -29,10 +31,22 @@ export default {
     SearchBox
   },
 
+  created () {
+    this.fetchVideo({ videoId: this.videoId })
+  },
+
   computed: {
-    videoId() {
+    ...mapGetters('watch', ['info', 'statistics']),
+
+    videoId () {
       return this.$route.params.videoId
     }
+  },
+
+  methods: {
+    ...mapActions('watch', {
+      fetchVideo: 'FETCH_VIDEO'
+    })
   }
 }
 </script>
