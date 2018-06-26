@@ -1,12 +1,32 @@
 <template>
   <div class="player">
-    <span class="player__play-button"></span>
+    <iframe
+      class="player__iframe"
+      width="100%" height="100%"
+      :src="videoSrc"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Player'
+  name: 'Player',
+
+  props: {
+    videoId: {
+      type: String,
+      required: true,
+    }
+  },
+
+  computed: {
+    videoSrc() {
+      return `https://www.youtube.com/embed/${this.videoId}`
+    }
+  }
 }
 </script>
 

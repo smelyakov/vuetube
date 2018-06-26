@@ -20,6 +20,10 @@ export default new Router({
     },
     {
       path: '/watch',
+      redirect: '/'
+    },
+    {
+      path: '/watch/:videoId',
       name: 'watch',
       component: Watch
     }

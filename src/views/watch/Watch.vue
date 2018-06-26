@@ -4,7 +4,7 @@
       <SearchBox />
     </header>
     <div class="watch__player">
-      <Player />
+      <Player :video-id="videoId" />
     </div>
     <div class="watch__content">
       <section class="watch__info">
@@ -27,6 +27,12 @@ export default {
   components: {
     Player,
     SearchBox
+  },
+
+  computed: {
+    videoId() {
+      return this.$route.params.videoId
+    }
   }
 }
 </script>
