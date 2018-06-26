@@ -12,9 +12,12 @@
     <div class="watch__content">
       <section class="watch__info">
         <h1 class="watch__title">{{ info.title }}</h1>
-        <h1 class="watch__views">{{ statistics.viewCount }} просмотров</h1>
+        <h1 class="watch__views">{{ statistics.viewCount }} views</h1>
       </section>
-      <section class="watch__comments"></section>
+      <section class="watch__comments">
+        <h3 class="watch__comments-title">{{ statistics.commentCount }} comments</h3>
+        <CommentList :comments="comments" />
+      </section>
       <aside class="watch__related"></aside>
     </div>
   </div>
@@ -23,23 +26,26 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
-import SearchBox from '@/components/SearchBox'
 import Player from './components/Player'
+import CommentList from './components/CommentList'
+import SearchBox from '@/components/SearchBox'
 
 export default {
   name: 'Watch',
 
   components: {
+    CommentList,
     Player,
     SearchBox
   },
 
   created () {
     this.fetchVideo({ videoId: this.videoId })
+    this.fetchComments({ videoId: this.videoId })
   },
 
   computed: {
-    ...mapGetters('watch', ['info', 'statistics']),
+    ...mapGetters('watch', ['comments', 'info', 'statistics']),
 
     videoId () {
       return this.$route.params.videoId
@@ -48,7 +54,8 @@ export default {
 
   methods: {
     ...mapActions('watch', {
-      fetchVideo: 'FETCH_VIDEO'
+      fetchVideo: 'FETCH_VIDEO',
+      fetchComments: 'FETCH_COMMENTS'
     })
   }
 }
@@ -82,6 +89,17 @@ export default {
 
   &__content {
     padding: 1.5rem 4%;
+  }
+
+  &__comments {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,.1);
+  }
+
+  &__comments-title {
+    font-weight: 500;
+    margin-bottom: 1.5rem;
   }
 
   &__title {

@@ -5,8 +5,19 @@ const API_KEY = 'AIzaSyCjbc9QcVGeGMW9MKBAmIPBdjPd-xIpbDg'
 
 export default {
   endpoints: {
+    comments: videoId => `${API_URL}/commentThreads?videoId=${videoId}&key=${API_KEY}&part=snippet`,
     video: id => `${API_URL}/videos?id=${id}&key=${API_KEY}&part=snippet,statistics`,
     search: query => `${API_URL}/search?q=${query}&key=${API_KEY}&part=snippet&type=video&safeSearch=strict`
+  },
+
+  getComments (videoId) {
+    const endpoint = this.endpoints.comments(videoId)
+    const options = {
+      method: 'GET'
+    }
+
+    return fetch(endpoint, options)
+      .then(handleJSON)
   },
 
   getVideoById (id) {

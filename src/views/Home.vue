@@ -36,7 +36,7 @@ export default {
     SearchBox
   },
 
-  destroyed() {
+  destroyed () {
     this.$store.dispatch('search/RESET_SEARCH_RESULTS')
   },
 
@@ -51,7 +51,7 @@ export default {
   methods: {
     getResults (query) {
       this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
-    },
+    }
   }
 }
 </script>
