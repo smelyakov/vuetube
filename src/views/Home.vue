@@ -1,13 +1,14 @@
 <template>
   <div class="home">
     <div class="home-search">
-      <SearchBox @input="getResults" @blur="resetResults" />
+      <SearchBox @input="getResults" />
       <div
         class="home-search__autocomplete"
         v-if="hasResults"
       >
-        <div
+        <router-link
           class="home-search__autocomplete-item"
+          :to="{name: 'watch', params: { videoId: item.id.videoId }}"
           v-for="(item, index) in results"
           :key="index"
         >
@@ -17,7 +18,7 @@
             alt=""
           />
           {{ item.snippet.title }}
-        </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,6 +36,10 @@ export default {
     SearchBox
   },
 
+  destroyed() {
+    this.$store.dispatch('search/RESET_SEARCH_RESULTS')
+  },
+
   computed: {
     ...mapState('search', ['results']),
 
@@ -47,10 +52,6 @@ export default {
     getResults (query) {
       this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
     },
-
-    resetResults () {
-      this.$store.dispatch('search/RESET_SEARCH_RESULTS')
-    }
   }
 }
 </script>
@@ -84,6 +85,8 @@ export default {
     justify-content: flex-start;
     text-align: left;
     padding: 0.5rem;
+    text-decoration: none;
+    color: inherit;
 
     &:hover {
       background: rgba(0,0,0,0.05);
