@@ -5,6 +5,7 @@
       type="search"
       :placeholder="placeholder"
       @input="onQueryChange"
+      @blur="$emit('blur')"
     />
     <button
       class="search-box__submit"
@@ -24,7 +25,7 @@ export default {
   },
 
   methods: {
-    onQueryChange(event) {
+    onQueryChange (event) {
       this.$emit('input', event.currentTarget.value)
     }
   }

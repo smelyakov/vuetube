@@ -20,11 +20,11 @@ html, body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   height: 100%;
   padding: 0;
   margin: 0;
+  line-height: 1.42;
 }
 #nav {
   padding: 30px;
