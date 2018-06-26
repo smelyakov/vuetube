@@ -26,6 +26,9 @@ export default new Router({
       path: '/watch/:videoId',
       name: 'watch',
       component: Watch
+    }, {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
