@@ -49,7 +49,7 @@ export default {
     },
 
     resetResults () {
-      this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query: null })
+      this.$store.dispatch('search/RESET_SEARCH_RESULTS')
     }
   }
 }

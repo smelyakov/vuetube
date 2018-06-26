@@ -23,6 +23,10 @@ const actions = {
         })
         .catch(error => reject(error))
     })
+  },
+
+  RESET_SEARCH_RESULTS: ({ commit }) => {
+    commit('SET_SEARCH_RESULTS', [])
   }
 }
 
