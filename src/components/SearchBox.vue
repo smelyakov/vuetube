@@ -7,9 +7,6 @@
       @input="onQueryChange"
       @blur="$emit('blur')"
     />
-    <button
-      class="search-box__submit"
-    >Найти</button>
   </div>
 </template>
 
