@@ -5,7 +5,7 @@
       v-for="comment in comments"
       :key="comment.id"
     >
-      <Comment v-bind="{ comment: comment.snippet.topLevelComment }" />
+      <Comment :comment="comment" />
     </div>
   </div>
 </template>

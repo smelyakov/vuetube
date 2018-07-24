@@ -8,7 +8,13 @@ const state = {
 }
 
 const getters = {
-  comments: state => state.comments || [],
+  comments: state => {
+    if (!state.comments) {
+      return []
+    }
+
+    return state.comments.map(comment => comment.snippet.topLevelComment)
+  },
   info: state => state.video ? state.video.snippet : {},
   statistics: state => state.video ? state.video.statistics : {}
 }
