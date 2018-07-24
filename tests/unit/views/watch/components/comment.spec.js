@@ -18,7 +18,7 @@ describe('Comment.vue', () => {
         publishedAt: '2016-07-22T12:26:45',
         textDisplay: 'Hell yeah! The Best. Remember.',
         textOriginal: 'Hell yeah! The Best. Remember.',
-        updatedAt: '2016-07-22T12:26:45.000Z',
+        updatedAt: '2016-07-22T12:26:45.000Z'
       }
     }
 

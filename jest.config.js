@@ -7,6 +7,14 @@ module.exports = {
   ],
   collectCoverage: true,
   coverageDirectory: 'tests/coverage',
+  collectCoverageFrom: [
+    'src/**/*.{js,vue}',
+    '!src/App.vue',
+    '!src/main.js',
+    '!src/router.js',
+    '!src/api/**/*.*',
+    '!src/utils/**/*.*'
+  ],
   transform: {
     '^.+\\.vue$': 'vue-jest',
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
