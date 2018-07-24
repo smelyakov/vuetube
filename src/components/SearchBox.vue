@@ -55,9 +55,15 @@ export default {
 
   methods: {
     getResults (event) {
-      const query = event.currentTarget.value;
+      const query = event.currentTarget.value
 
       this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
+    }
+  },
+
+  watch: {
+    $route () {
+      this.$store.dispatch('search/RESET_SEARCH_RESULTS')
     }
   }
 }

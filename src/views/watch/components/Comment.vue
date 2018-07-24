@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from 'moment'
 
-const dateFormat = 'D MMMM YYYY, HH:mm';
+const dateFormat = 'D MMMM YYYY, HH:mm'
 
 export default {
   name: 'Comment',

@@ -12,10 +12,10 @@
     <div class="watch__content">
       <section class="watch__info">
         <h1 class="watch__title">{{ info.title }}</h1>
-        <h1 class="watch__views">{{ statistics.viewCount }} views</h1>
+        <h1 class="watch__views">{{ viewCount }}</h1>
       </section>
       <section class="watch__comments">
-        <h3 class="watch__comments-title">{{ statistics.commentCount }} comments</h3>
+        <h3 class="watch__comments-title">{{ commentCount }}</h3>
         <CommentList :comments="comments" />
       </section>
       <aside class="watch__related"></aside>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import numeral from 'numeral'
 import { mapActions, mapGetters } from 'vuex'
 
 import Player from './components/Player'
@@ -47,6 +48,18 @@ export default {
   computed: {
     ...mapGetters('watch', ['comments', 'info', 'statistics']),
 
+    commentCount () {
+      const count = this.statistics.commentCount
+
+      return `${this.formatNumber(count)} comment${count > 1 ? 's' : ''}`
+    },
+
+    viewCount () {
+      const count = this.statistics.viewCount
+
+      return `${this.formatNumber(count)} view${count > 1 ? 's' : ''}`
+    },
+
     videoId () {
       return this.$route.params.videoId
     }
@@ -56,7 +69,11 @@ export default {
     ...mapActions('watch', {
       fetchVideo: 'FETCH_VIDEO',
       fetchComments: 'FETCH_COMMENTS'
-    })
+    }),
+
+    formatNumber (value) {
+      return numeral(value).format('0,0')
+    }
   }
 }
 </script>
