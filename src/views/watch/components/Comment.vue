@@ -15,6 +15,10 @@
 </template>
 
 <script>
+import moment from 'moment';
+
+const dateFormat = 'D MMMM YYYY, HH:mm';
+
 export default {
   name: 'Comment',
 
@@ -33,7 +37,7 @@ export default {
     },
 
     publishedAt () {
-      return this.comment.snippet.publishedAt
+      return moment(this.comment.snippet.publishedAt).format(dateFormat)
     },
 
     textDisplay () {

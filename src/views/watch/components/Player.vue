@@ -24,7 +24,7 @@ export default {
 
   computed: {
     videoSrc () {
-      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1`
+      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1&rel=0`
     }
   }
 }
