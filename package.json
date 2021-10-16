@@ -10,10 +10,11 @@
     "test:unit-watch": "vue-cli-service test:unit --watchAll"
   },
   "dependencies": {
-    "moment": "2.22.2",
+    "@vue/compat": "^3.2.20",
+    "date-fns": "^2.25.0",
     "numeral": "2.0.6",
     "reset-css": "^5.0.1",
-    "vue": "^2.6.14",
+    "vue": "^3.2.20",
     "vue-router": "^3.5.2",
     "vuex": "^3.6.2"
   },
@@ -21,7 +22,7 @@
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
     "@vue/cli-plugin-unit-jest": "^3.12.1",
-    "@vue/cli-service": "^3.12.1",
+    "@vue/cli-service": "^4.5.14",
     "@vue/eslint-config-standard": "^6.1.0",
     "@vue/test-utils": "^1.2.2",
     "babel-core": "7.0.0-bridge.0",
@@ -29,11 +30,11 @@
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier-vue": "^3.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.19.1",
     "sass": "^1.43.2",
-    "sass-loader": "^10.2.0",
-    "vue-template-compiler": "^2.6.14"
+    "sass-loader": "^10.2.0"
   },
   "browserslist": [
     "> 1%",
