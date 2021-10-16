@@ -23,8 +23,10 @@ export default {
   name: 'Comment',
 
   props: {
-    comment: Object,
-    required: true
+    comment: {
+      type: Object,
+      required: true
+    }
   },
 
   computed: {

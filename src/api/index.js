@@ -1,7 +1,7 @@
 import { handleJSON } from '@/utils/fetch-utils'
 
 const API_URL = 'https://content.googleapis.com/youtube/v3'
-const API_KEY = 'AIzaSyCjbc9QcVGeGMW9MKBAmIPBdjPd-xIpbDg'
+const API_KEY = 'AIzaSyCDowhhIv5S6iUeQEGBkBxbJoQtUv6hxZA'
 
 export default {
   endpoints: {
