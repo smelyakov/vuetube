@@ -1,21 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
 import search from './modules/search'
 import watch from './modules/watch'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+const store = createStore({
   state: {},
-  mutations: {
-
-  },
-  actions: {
-
-  },
+  mutations: {},
+  actions: {},
   modules: {
     search,
     watch
   }
 })
+
+export default store

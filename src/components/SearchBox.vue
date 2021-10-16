@@ -41,7 +41,7 @@ export default {
     }
   },
 
-  destroyed () {
+  unmounted () {
     this.$store.dispatch('search/RESET_SEARCH_RESULTS')
   },
 
@@ -62,8 +62,11 @@ export default {
   },
 
   watch: {
-    $route () {
-      this.$store.dispatch('search/RESET_SEARCH_RESULTS')
+    $route: {
+      handler () {
+        this.$store.dispatch('search/RESET_SEARCH_RESULTS')
+      },
+      deep: true
     }
   }
 }

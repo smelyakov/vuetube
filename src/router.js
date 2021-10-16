@@ -1,12 +1,11 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Watch from './views/watch/Watch.vue'
 
-Vue.use(Router)
-
-export default new Router({
+const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -26,9 +25,12 @@ export default new Router({
       path: '/watch/:videoId',
       name: 'watch',
       component: Watch
-    }, {
-      path: '*',
+    },
+    {
+      path: '/:pathMatch(.*)s',
       redirect: '/'
     }
   ]
 })
+
+export default router
