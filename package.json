@@ -35,7 +35,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.19.1",
     "sass": "^1.43.2",
-    "sass-loader": "^10.2.0"
+    "sass-loader": "12.2.0"
   },
   "browserslist": [
     "> 1%",
