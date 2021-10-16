@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import moment from 'moment'
+import { format } from 'date-fns'
 
-const dateFormat = 'D MMMM YYYY, HH:mm'
+const dateFormat = 'd MMMM yyyy, HH:mm'
 
 export default {
   name: 'Comment',
@@ -39,7 +39,9 @@ export default {
     },
 
     publishedAt () {
-      return moment(this.comment.snippet.publishedAt).format(dateFormat)
+      const { publishedAt } = this.comment.snippet
+
+      return format(new Date(publishedAt), dateFormat)
     },
 
     textDisplay () {
