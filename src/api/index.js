@@ -1,4 +1,4 @@
-import { handleJSON } from '../utils/fetch-utils'
+import { handleJSON } from '@/utils/fetch-utils'
 
 const API_URL = 'https://content.googleapis.com/youtube/v3'
 const API_KEY = 'AIzaSyCDowhhIv5S6iUeQEGBkBxbJoQtUv6hxZA'

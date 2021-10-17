@@ -27,9 +27,9 @@
 import numeral from 'numeral'
 import { mapActions, mapGetters } from 'vuex'
 
+import SearchBox from '@/components/SearchBox.vue'
 import Player from './components/Player.vue'
 import CommentList from './components/CommentList.vue'
-import SearchBox from '../../components/SearchBox.vue'
 
 export default {
   name: 'Watch',
