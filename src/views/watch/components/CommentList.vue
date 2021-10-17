@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Comment from './Comment'
+import Comment from './Comment.vue'
 
 export default {
   name: 'Comments',
