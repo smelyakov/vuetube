@@ -37,7 +37,8 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import numeral from 'numeral'
 import { mapActions, mapGetters } from 'vuex'
 
@@ -45,7 +46,7 @@ import SearchBox from '@/components/SearchBox.vue'
 import Player from './components/Player.vue'
 import CommentList from './components/CommentList.vue'
 
-export default {
+export default defineComponent({
   name: 'Watch',
 
   components: {
@@ -57,13 +58,13 @@ export default {
   computed: {
     ...mapGetters('watch', ['comments', 'info', 'statistics']),
 
-    commentCount() {
+    commentCount(): string {
       const count = this.statistics.commentCount
 
       return `${this.formatNumber(count)} comment${count > 1 ? 's' : ''}`
     },
 
-    viewCount() {
+    viewCount(): string {
       const count = this.statistics.viewCount
 
       return `${this.formatNumber(count)} view${count > 1 ? 's' : ''}`
@@ -85,11 +86,11 @@ export default {
       fetchComments: 'FETCH_COMMENTS'
     }),
 
-    formatNumber(value) {
+    formatNumber(value: number): string {
       return numeral(value).format('0,0')
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

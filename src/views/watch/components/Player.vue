@@ -12,8 +12,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'Player',
 
   props: {
@@ -24,11 +26,11 @@ export default {
   },
 
   computed: {
-    videoSrc() {
+    videoSrc(): string {
       return `https://www.youtube.com/embed/${this.videoId}?autoplay=1&rel=0`
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

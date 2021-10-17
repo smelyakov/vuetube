@@ -26,9 +26,10 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'SearchBox',
 
   props: {
@@ -68,7 +69,7 @@ export default {
       this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

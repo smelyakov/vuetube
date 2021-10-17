@@ -14,12 +14,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { format } from 'date-fns'
 
 const dateFormat = 'd MMMM yyyy, HH:mm'
 
-export default {
+export default defineComponent({
   name: 'Comment',
 
   props: {
@@ -30,31 +31,31 @@ export default {
   },
 
   computed: {
-    author() {
+    author(): string {
       return this.comment.snippet.authorDisplayName
     },
 
-    avatar() {
+    avatar(): string {
       return this.bigAvatar(this.comment.snippet.authorProfileImageUrl)
     },
 
-    publishedAt() {
+    publishedAt(): string {
       const { publishedAt } = this.comment.snippet
 
       return format(new Date(publishedAt), dateFormat)
     },
 
-    textDisplay() {
+    textDisplay(): string {
       return this.comment.snippet.textDisplay
     }
   },
 
   methods: {
-    bigAvatar(url) {
+    bigAvatar(url: string): string {
       return url.replace(/(\/.*s)28(.*\/photo.jpg)$/, '$1' + '48' + '$2')
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

@@ -6,10 +6,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Comment from './Comment.vue'
 
-export default {
+export default defineComponent({
   name: 'Comments',
 
   components: {
@@ -22,7 +23,7 @@ export default {
       default: () => []
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

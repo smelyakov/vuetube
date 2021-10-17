@@ -1,12 +1,8 @@
 module.exports = {
-  moduleFileExtensions: [
-    'js',
-    'jsx',
-    'json',
-    'vue'
-  ],
+  moduleFileExtensions: ['js', 'ts', 'json', 'vue'],
   collectCoverage: true,
   coverageDirectory: 'tests/coverage',
+  coverageProvider: 'v8',
   collectCoverageFrom: [
     'src/**/*.{js,vue}',
     '!src/App.vue',
@@ -16,17 +12,15 @@ module.exports = {
     '!src/utils/**/*.*'
   ],
   transform: {
-    '^.+\\.vue$': 'vue-jest',
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-    '^.+\\.jsx?$': 'babel-jest'
+    '.*\\.(vue)$': '@vue/vue3-jest',
+    '.*\\.(js|ts)$': 'ts-jest'
   },
+  transformIgnorePatterns: [`/node_modules/*`],
+  testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
-  snapshotSerializers: [
-    'jest-serializer-vue'
-  ],
   testMatch: [
-    '<rootDir>/(tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))'
+    '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
   ]
 }

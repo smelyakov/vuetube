@@ -6,16 +6,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import SearchBox from '@/components/SearchBox.vue'
 
-export default {
+export default defineComponent({
   name: 'Home',
 
   components: {
     SearchBox
   }
-}
+})
 </script>
 
 <style lang="scss">
