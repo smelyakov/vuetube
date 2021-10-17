@@ -10,7 +10,7 @@
 import SearchBox from '@/components/SearchBox.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
 
   components: {
     SearchBox

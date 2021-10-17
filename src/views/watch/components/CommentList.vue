@@ -1,10 +1,6 @@
 <template>
   <div class="comments">
-    <div
-      class="comments__item"
-      v-for="comment in comments"
-      :key="comment.id"
-    >
+    <div v-for="comment in comments" :key="comment.id" class="comments__item">
       <Comment :comment="comment" />
     </div>
   </div>

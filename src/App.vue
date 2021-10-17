@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style lang="scss">
 @import 'reset-css';
 
-html, body {
+html,
+body {
   height: 100%;
 }
 

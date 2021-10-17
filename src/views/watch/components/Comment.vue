@@ -30,27 +30,27 @@ export default {
   },
 
   computed: {
-    author () {
+    author() {
       return this.comment.snippet.authorDisplayName
     },
 
-    avatar () {
+    avatar() {
       return this.bigAvatar(this.comment.snippet.authorProfileImageUrl)
     },
 
-    publishedAt () {
+    publishedAt() {
       const { publishedAt } = this.comment.snippet
 
       return format(new Date(publishedAt), dateFormat)
     },
 
-    textDisplay () {
+    textDisplay() {
       return this.comment.snippet.textDisplay
     }
   },
 
   methods: {
-    bigAvatar (url) {
+    bigAvatar(url) {
       return url.replace(/(\/.*s)28(.*\/photo.jpg)$/, '$1' + '48' + '$2')
     }
   }

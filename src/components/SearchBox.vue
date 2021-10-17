@@ -7,15 +7,12 @@
       @input="getResults"
       @blur="$emit('blur')"
     />
-    <div
-      class="search-box__autocomplete"
-      v-if="hasResults"
-    >
+    <div v-if="hasResults" class="search-box__autocomplete">
       <router-link
-        class="search-box__autocomplete-item"
-        :to="{name: 'watch', params: { videoId: item.id.videoId }}"
         v-for="(item, index) in results"
         :key="index"
+        class="search-box__autocomplete-item"
+        :to="{ name: 'watch', params: { videoId: item.id.videoId } }"
       >
         <img
           class="search-box__autocomplete-thumb"
@@ -41,32 +38,34 @@ export default {
     }
   },
 
-  unmounted () {
-    this.$store.dispatch('search/RESET_SEARCH_RESULTS')
-  },
+  emits: ['blur'],
 
   computed: {
     ...mapState('search', ['results']),
 
-    hasResults () {
+    hasResults() {
       return this.results.length > 0
-    }
-  },
-
-  methods: {
-    getResults (event) {
-      const query = event.currentTarget.value
-
-      this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
     }
   },
 
   watch: {
     $route: {
-      handler () {
+      handler() {
         this.$store.dispatch('search/RESET_SEARCH_RESULTS')
       },
       deep: true
+    }
+  },
+
+  unmounted() {
+    this.$store.dispatch('search/RESET_SEARCH_RESULTS')
+  },
+
+  methods: {
+    getResults(event) {
+      const query = event.currentTarget.value
+
+      this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
     }
   }
 }
@@ -102,11 +101,11 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background: rgba(0,0,0,.1);
+      background: rgba(0, 0, 0, 0.1);
     }
 
     &:active {
-      background: rgba(0,0,0,.15);
+      background: rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -117,7 +116,7 @@ export default {
     right: 0;
     top: 100%;
     border: 1px solid #ccc;
-    box-shadow: 0 20px 15px -15px rgba(0,0,0,.15);
+    box-shadow: 0 20px 15px -15px rgba(0, 0, 0, 0.15);
     background: white;
   }
 
@@ -131,7 +130,7 @@ export default {
     color: inherit;
 
     &:hover {
-      background: rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.05);
     }
   }
 

@@ -8,15 +8,15 @@ const state = {
 }
 
 const getters = {
-  comments: state => {
+  comments: (state) => {
     if (!state.comments) {
       return []
     }
 
-    return state.comments.map(comment => comment.snippet.topLevelComment)
+    return state.comments.map((comment) => comment.snippet.topLevelComment)
   },
-  info: state => state.video ? state.video.snippet : {},
-  statistics: state => state.video ? state.video.statistics : {}
+  info: (state) => (state.video ? state.video.snippet : {}),
+  statistics: (state) => (state.video ? state.video.statistics : {})
 }
 
 const actions = {
@@ -26,14 +26,15 @@ const actions = {
         reject(new Error('FETCH_COMMENTS: videoId is not provided'))
       }
 
-      return api.getComments(videoId)
+      return api
+        .getComments(videoId)
         .then((response) => {
           const comments = response.items
 
           commit('SET_COMMENTS', comments)
           resolve(comments)
         })
-        .catch(error => reject(error))
+        .catch((error) => reject(error))
     })
   },
 
@@ -43,14 +44,15 @@ const actions = {
         reject(new Error('FETCH_VIDEO: videoId is not provided'))
       }
 
-      return api.getVideoById(videoId)
+      return api
+        .getVideoById(videoId)
         .then((response) => {
           const video = response.items[0]
 
           commit('SET_VIDEO', video)
           resolve(video)
         })
-        .catch(error => reject(error))
+        .catch((error) => reject(error))
     })
   }
 }

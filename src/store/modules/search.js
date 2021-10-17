@@ -14,14 +14,15 @@ const actions = {
     }
 
     return new Promise((resolve, reject) => {
-      return api.search({ query })
+      return api
+        .search({ query })
         .then((response) => {
           const { items } = response
 
           commit('SET_SEARCH_RESULTS', items)
           resolve(items)
         })
-        .catch(error => reject(error))
+        .catch((error) => reject(error))
     })
   },
 

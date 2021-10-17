@@ -5,38 +5,38 @@ const API_KEY = 'AIzaSyCDowhhIv5S6iUeQEGBkBxbJoQtUv6hxZA'
 
 export default {
   endpoints: {
-    comments: videoId => `${API_URL}/commentThreads?videoId=${videoId}&key=${API_KEY}&part=snippet`,
-    video: id => `${API_URL}/videos?id=${id}&key=${API_KEY}&part=snippet,statistics`,
-    search: query => `${API_URL}/search?q=${query}&key=${API_KEY}&part=snippet&type=video&safeSearch=strict`
+    comments: (videoId) =>
+      `${API_URL}/commentThreads?videoId=${videoId}&key=${API_KEY}&part=snippet`,
+    video: (id) =>
+      `${API_URL}/videos?id=${id}&key=${API_KEY}&part=snippet,statistics`,
+    search: (query) =>
+      `${API_URL}/search?q=${query}&key=${API_KEY}&part=snippet&type=video&safeSearch=strict`
   },
 
-  getComments (videoId) {
+  getComments(videoId) {
     const endpoint = this.endpoints.comments(videoId)
     const options = {
       method: 'GET'
     }
 
-    return fetch(endpoint, options)
-      .then(handleJSON)
+    return fetch(endpoint, options).then(handleJSON)
   },
 
-  getVideoById (id) {
+  getVideoById(id) {
     const endpoint = this.endpoints.video(id)
     const options = {
       method: 'GET'
     }
 
-    return fetch(endpoint, options)
-      .then(handleJSON)
+    return fetch(endpoint, options).then(handleJSON)
   },
 
-  search ({ query }) {
+  search({ query }) {
     const endpoint = this.endpoints.search(query)
     const options = {
       method: 'GET'
     }
 
-    return fetch(endpoint, options)
-      .then(handleJSON)
+    return fetch(endpoint, options).then(handleJSON)
   }
 }
