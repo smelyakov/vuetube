@@ -25,9 +25,11 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-import { mapState } from 'vuex'
+<script lang="ts">
+import { storeToRefs } from 'pinia'
+import { computed, defineComponent } from 'vue'
+
+import { useSearchStore } from '@/store/search'
 
 export default defineComponent({
   name: 'SearchBox',
@@ -41,33 +43,37 @@ export default defineComponent({
 
   emits: ['blur'],
 
-  computed: {
-    ...mapState('search', ['results']),
+  setup() {
+    const searchStore = useSearchStore()
+    const { fetchSearchResults } = searchStore
+    const { results } = storeToRefs(searchStore)
+    const hasResults = computed(() => results.value.length > 0)
 
-    hasResults() {
-      return this.results.length > 0
+    const getResults = (event: Event) => {
+      const query: string = (event.currentTarget as HTMLInputElement).value
+
+      fetchSearchResults(query)
+    }
+
+    return {
+      results,
+      hasResults,
+      getResults,
+      searchStore
     }
   },
 
   watch: {
     $route: {
       handler() {
-        this.$store.dispatch('search/RESET_SEARCH_RESULTS')
+        this.searchStore.$reset()
       },
       deep: true
     }
   },
 
   unmounted() {
-    this.$store.dispatch('search/RESET_SEARCH_RESULTS')
-  },
-
-  methods: {
-    getResults(event) {
-      const query = event.currentTarget.value
-
-      this.$store.dispatch('search/FETCH_SEARCH_RESULTS', { query })
-    }
+    this.searchStore.$reset()
   }
 })
 </script>

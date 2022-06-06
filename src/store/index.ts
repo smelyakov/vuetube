@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 
-import search from './modules/search'
 import watch from './modules/watch'
 
 const store = createStore({
@@ -8,7 +7,6 @@ const store = createStore({
   mutations: {},
   actions: {},
   modules: {
-    search,
     watch
   }
 })
