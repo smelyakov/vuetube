@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-search">
-      <SearchBox />
+      <SearchBox placeholder="Search on Youtube" />
     </div>
   </div>
 </template>
