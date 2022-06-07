@@ -30,7 +30,7 @@
 import { storeToRefs } from 'pinia'
 import { computed, defineComponent } from 'vue'
 
-import { useSearchStore } from '@/store/search'
+import { useSearchStore } from '@/store'
 
 export default defineComponent({
   name: 'SearchBox',

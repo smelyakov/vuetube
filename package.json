@@ -16,10 +16,11 @@
     "pinia": "^2.0.14",
     "reset-css": "^5.0.1",
     "vue": "^3.2.20",
-    "vue-router": "^4.0.12",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
+    "@pinia/testing": "^0.0.12",
+    "@types/jest": "^27.5.2",
     "@types/numeral": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",

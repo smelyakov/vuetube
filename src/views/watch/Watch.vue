@@ -46,7 +46,7 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import SearchBox from '@/components/SearchBox.vue'
 import Player from './components/Player.vue'
 import CommentList from './components/CommentList.vue'
-import { useWatchStore } from '@/store/watch'
+import { useWatchStore } from '@/store'
 
 export default defineComponent({
   name: 'Watch',
