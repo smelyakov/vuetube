@@ -6,24 +6,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { YTTopLevelComment } from '@/api/types'
+import { defineProps } from 'vue'
 import Comment from './Comment.vue'
 
-export default defineComponent({
-  name: 'Comments',
+interface Props {
+  comments: YTTopLevelComment[]
+}
 
-  components: {
-    Comment
-  },
-
-  props: {
-    comments: {
-      type: Array,
-      default: () => []
-    }
-  }
-})
+defineProps<Props>()
 </script>
 
 <style lang="scss">
