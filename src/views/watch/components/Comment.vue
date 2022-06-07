@@ -58,6 +58,10 @@ const publishedAt = computed(() =>
   &__avatar {
     flex: 0 0 auto;
     margin-right: 16px;
+
+    &:empty {
+      display: none;
+    }
   }
 }
 </style>
