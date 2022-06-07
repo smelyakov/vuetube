@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 
 import { getComments, getVideoById } from '@/api'
-import { YTComment, YTVideo } from '@/api/types'
+import { YTTopLevelComment, YTVideo } from '@/api/types'
 
 export const useWatchStore = defineStore('watch', {
   state: (): {
-    comments: YTComment['snippet']['topLevelComment'][]
+    comments: YTTopLevelComment[]
     video: YTVideo | null
   } => ({
     comments: [],

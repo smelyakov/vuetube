@@ -6,7 +6,17 @@ export type CommentsResponse = {
   items: YTComment[]
 }
 
-export interface YTSearchResult {
+export type YTVideoResponse = {
+  etag: string
+  kind: string
+  items: YTVideo[]
+  pageInfo: {
+    totalResults: number
+    resultsPerPage: number
+  }
+}
+
+export type YTSearchResult = {
   etag: string
   id: {
     kind: string
@@ -41,6 +51,26 @@ export interface YTSearchResult {
   }
 }
 
+export type YTTopLevelComment = {
+  etag: string
+  id: string
+  kind: string
+  snippet: {
+    authorChannelId: { value: string }
+    authorChannelUrl: string
+    authorDisplayName: string
+    authorProfileImageUrl: string
+    canRate: boolean
+    likeCount: number
+    publishedAt: string
+    textDisplay: string
+    textOriginal: string
+    updatedAt: string
+    videoId: string
+    viewerRating: string
+  }
+}
+
 export interface YTComment {
   etag: string
   id: string
@@ -48,37 +78,9 @@ export interface YTComment {
   snippet: {
     canReply: boolean
     isPublic: boolean
-    topLevelComment: {
-      etag: string
-      id: string
-      kind: string
-      snippet: {
-        authorChannelId: { value: string }
-        authorChannelUrl: string
-        authorDisplayName: string
-        authorProfileImageUrl: string
-        canRate: boolean
-        likeCount: number
-        publishedAt: string
-        textDisplay: string
-        textOriginal: string
-        updatedAt: string
-        videoId: string
-        viewerRating: string
-      }
-    }
+    topLevelComment: YTTopLevelComment
     totalReplyCount: number
     videoId: string
-  }
-}
-
-export interface YTVideoResponse {
-  etag: string
-  kind: string
-  items: YTVideo[]
-  pageInfo: {
-    totalResults: number
-    resultsPerPage: number
   }
 }
 
