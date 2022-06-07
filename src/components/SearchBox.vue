@@ -8,7 +8,7 @@
       @blur="$emit('blur')"
     />
     <div v-if="hasResults" class="search-box__autocomplete">
-      <router-link
+      <RouterLink
         v-for="(item, index) in results"
         :key="index"
         class="search-box__autocomplete-item"
@@ -21,62 +21,57 @@
           alt=""
         />
         {{ item.snippet.title }}
-      </router-link>
+      </RouterLink>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { computed, defineComponent } from 'vue'
+import {
+  computed,
+  defineEmits,
+  defineProps,
+  onUnmounted,
+  withDefaults
+} from 'vue'
+import { RouterLink } from 'vue-router'
 
 import { useSearchStore } from '@/store'
+import { onBeforeRouteUpdate } from 'vue-router'
 
-export default defineComponent({
-  name: 'SearchBox',
+interface Props {
+  placeholder?: string
+}
 
-  props: {
-    placeholder: {
-      type: String,
-      default: 'Type to find...'
-    }
-  },
+interface Emits {
+  (e: 'blur'): void
+}
 
-  emits: ['blur'],
+const searchStore = useSearchStore()
+const { fetchSearchResults } = searchStore
+const { results } = storeToRefs(searchStore)
+const hasResults = computed(() => results.value.length > 0)
 
-  setup() {
-    const searchStore = useSearchStore()
-    const { fetchSearchResults } = searchStore
-    const { results } = storeToRefs(searchStore)
-    const hasResults = computed(() => results.value.length > 0)
+const getResults = (event: Event) => {
+  const query: string = (event.currentTarget as HTMLInputElement).value
 
-    const getResults = (event: Event) => {
-      const query: string = (event.currentTarget as HTMLInputElement).value
+  fetchSearchResults(query)
+}
 
-      fetchSearchResults(query)
-    }
+withDefaults(defineProps<Props>(), {
+  placeholder: 'Type to find...'
+})
 
-    return {
-      results,
-      hasResults,
-      getResults,
-      searchStore
-    }
-  },
+defineEmits<Emits>()
 
-  watch: {
-    $route: {
-      handler() {
-        this.searchStore.$reset()
-      },
-      deep: true
-    }
-  },
-
-  unmounted() {
-    this.searchStore.$reset()
+onBeforeRouteUpdate((to, from) => {
+  if (to.params.videoId !== from.params.videoId) {
+    searchStore.$reset()
   }
 })
+
+onUnmounted(() => searchStore.$reset())
 </script>
 
 <style lang="scss">
