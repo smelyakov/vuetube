@@ -37,83 +37,54 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import numeral from 'numeral'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import SearchBox from '@/components/SearchBox.vue'
+import { useWatchStore } from '@/store'
 import Player from './components/Player.vue'
 import CommentList from './components/CommentList.vue'
-import { useWatchStore } from '@/store'
 
-export default defineComponent({
-  name: 'Watch',
+const store = useWatchStore()
+const { fetchComments, fetchVideo } = store
+const { comments, info, statistics } = storeToRefs(store)
 
-  components: {
-    CommentList,
-    Player,
-    SearchBox
-  },
+const route = useRoute()
 
-  setup() {
-    const store = useWatchStore()
-    const { fetchComments, fetchVideo } = store
-    const { comments, info, statistics } = storeToRefs(store)
+const videoId = computed(() => route.params.videoId.toString())
 
-    const route = useRoute()
+onBeforeRouteUpdate((to, from) => {
+  if (to.params.videoId !== from.params.videoId) {
+    const videoId = to.params.videoId.toString()
 
-    const videoId = computed(() => route.params.videoId.toString())
-
-    onBeforeRouteUpdate((to, from) => {
-      if (to.params.videoId !== from.params.videoId) {
-        const videoId = to.params.videoId.toString()
-
-        fetchComments({ videoId })
-        fetchVideo({ videoId })
-      }
-    })
-
-    return {
-      comments,
-      info,
-      statistics,
-      fetchComments,
-      fetchVideo,
-      videoId
-    }
-  },
-
-  computed: {
-    commentCount(): string {
-      const count = this.statistics?.commentCount
-
-      if (!count) {
-        return 'No comments'
-      }
-
-      return `${this.formatNumber(count)} comment${count > 1 ? 's' : ''}`
-    },
-
-    viewCount(): string {
-      const count = this.statistics?.viewCount ?? 0
-
-      return `${this.formatNumber(count)} view${count > 1 ? 's' : ''}`
-    }
-  },
-
-  created() {
-    this.fetchVideo({ videoId: this.videoId })
-    this.fetchComments({ videoId: this.videoId })
-  },
-
-  methods: {
-    formatNumber(value: number): string {
-      return numeral(value).format('0,0')
-    }
+    fetchComments({ videoId })
+    fetchVideo({ videoId })
   }
 })
+
+const formatNumber = (value: number): string => numeral(value).format('0,0')
+
+const commentCount = computed((): string => {
+  const count = statistics.value?.commentCount
+
+  if (!count) {
+    return 'No comments'
+  }
+
+  return `${formatNumber(count)} comment${count > 1 ? 's' : ''}`
+})
+
+const viewCount = computed(() => {
+  const count = statistics.value?.viewCount ?? 0
+
+  return `${formatNumber(count)} view${count > 1 ? 's' : ''}`
+})
+
+fetchVideo({ videoId: videoId.value })
+fetchComments({ videoId: videoId.value })
 </script>
 
 <style lang="scss">
