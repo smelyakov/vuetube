@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { storeToRefs } from 'pinia'
 import numeral from 'numeral'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
@@ -64,7 +64,7 @@ export default defineComponent({
 
     const route = useRoute()
 
-    const videoId: string = route.params.videoId as string
+    const videoId = computed(() => route.params.videoId.toString())
 
     onBeforeRouteUpdate((to, from) => {
       if (to.params.videoId !== from.params.videoId) {
