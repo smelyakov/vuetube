@@ -15,12 +15,11 @@
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
 
-const props = defineProps({
-  videoId: {
-    type: String,
-    required: true
-  }
-})
+interface Props {
+  videoId: string
+}
+
+const props = defineProps<Props>()
 
 const videoSrc = computed(
   () => `https://www.youtube.com/embed/${props.videoId}?autoplay=1&rel=0`
