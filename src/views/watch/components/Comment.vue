@@ -1,8 +1,6 @@
 <template>
   <div class="comment">
-    <div class="comment__avatar">
-      <img :src="avatar" alt="" />
-    </div>
+    <img class="comment__avatar" :src="avatar" alt="" />
     <div class="comment_body">
       <span class="comment__author">{{ author }}</span>
       <span class="comment__date">{{ publishedAt }}</span>
@@ -14,48 +12,33 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed, defineProps } from 'vue'
 import { format } from 'date-fns'
+import { YTTopLevelComment } from '@/api/types'
+
+interface Props {
+  comment: YTTopLevelComment
+}
 
 const dateFormat = 'd MMMM yyyy, HH:mm'
 
-export default defineComponent({
-  name: 'Comment',
+const props = defineProps<Props>()
 
-  props: {
-    comment: {
-      type: Object,
-      required: true
-    }
-  },
+const bigAvatar = (url: string): string =>
+  url.replace(/(\/.*s)28(.*\/photo.jpg)$/, '$1' + '48' + '$2')
 
-  computed: {
-    author(): string {
-      return this.comment.snippet.authorDisplayName
-    },
+const author = computed(() => props.comment.snippet.authorDisplayName)
 
-    avatar(): string {
-      return this.bigAvatar(this.comment.snippet.authorProfileImageUrl)
-    },
+const avatar = computed(() =>
+  bigAvatar(props.comment.snippet.authorProfileImageUrl)
+)
 
-    publishedAt(): string {
-      const { publishedAt } = this.comment.snippet
+const textDisplay = computed(() => props.comment.snippet.textDisplay)
 
-      return format(new Date(publishedAt), dateFormat)
-    },
-
-    textDisplay(): string {
-      return this.comment.snippet.textDisplay
-    }
-  },
-
-  methods: {
-    bigAvatar(url: string): string {
-      return url.replace(/(\/.*s)28(.*\/photo.jpg)$/, '$1' + '48' + '$2')
-    }
-  }
-})
+const publishedAt = computed(() =>
+  format(new Date(props.comment.snippet.publishedAt), dateFormat)
+)
 </script>
 
 <style lang="scss">
