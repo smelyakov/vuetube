@@ -88,42 +88,46 @@ export type YTVideo = {
   etag: string
   id: string
   kind: string
-  snippet: {
-    categoryId: string
-    channelId: string
-    channelTitle: string
-    defaultAudioLanguage: string
+  snippet: YTVideoInfo
+  statistics: YTVideoStatistics
+}
+
+export type YTVideoInfo = {
+  categoryId: string
+  channelId: string
+  channelTitle: string
+  defaultAudioLanguage: string
+  description: string
+  liveBroadcastContent: string
+  localized: {
     description: string
-    liveBroadcastContent: string
-    localized: {
-      description: string
-      title: string
-    }
-    publishedAt: string
-    tags: string[]
-    thumbnails: {
-      default: {
-        height: number
-        url: string
-        width: number
-      }
-      high: {
-        height: number
-        url: string
-        width: number
-      }
-      medium: {
-        height: number
-        url: string
-        width: 320
-      }
-    }
     title: string
   }
-  statistics: {
-    commentCount: string
-    favoriteCount: string
-    likeCount: string
-    viewCount: string
+  publishedAt: string
+  tags: string[]
+  thumbnails: {
+    default: {
+      height: number
+      url: string
+      width: number
+    }
+    high: {
+      height: number
+      url: string
+      width: number
+    }
+    medium: {
+      height: number
+      url: string
+      width: 320
+    }
   }
+  title: string
+}
+
+export type YTVideoStatistics = {
+  commentCount: number
+  favoriteCount: number
+  likeCount: number
+  viewCount: number
 }

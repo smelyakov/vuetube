@@ -1,7 +1,7 @@
 <template>
   <div class="watch">
     <header class="watch__header">
-      <router-link to="/" class="watch__back">
+      <RouterLink to="/" class="watch__back">
         <svg
           aria-hidden="true"
           data-prefix="far"
@@ -17,7 +17,7 @@
             class=""
           ></path>
         </svg>
-      </router-link>
+      </RouterLink>
       <SearchBox />
     </header>
     <div class="watch__player">
@@ -25,7 +25,7 @@
     </div>
     <div class="watch__content">
       <section class="watch__info">
-        <h1 class="watch__title">{{ info.title }}</h1>
+        <h1 class="watch__title">{{ info?.title }}</h1>
         <h1 class="watch__views">{{ viewCount }}</h1>
       </section>
       <section class="watch__comments">
@@ -39,12 +39,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { storeToRefs } from 'pinia'
 import numeral from 'numeral'
-import { mapActions, mapGetters } from 'vuex'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import SearchBox from '@/components/SearchBox.vue'
 import Player from './components/Player.vue'
 import CommentList from './components/CommentList.vue'
+import { useWatchStore } from '@/store/watch'
 
 export default defineComponent({
   name: 'Watch',
@@ -55,23 +57,49 @@ export default defineComponent({
     SearchBox
   },
 
-  computed: {
-    ...mapGetters('watch', ['comments', 'info', 'statistics']),
+  setup() {
+    const store = useWatchStore()
+    const { fetchComments, fetchVideo } = store
+    const { comments, info, statistics } = storeToRefs(store)
 
+    const route = useRoute()
+
+    const videoId: string = route.params.videoId as string
+
+    onBeforeRouteUpdate((to, from) => {
+      if (to.params.videoId !== from.params.videoId) {
+        const videoId = to.params.videoId.toString()
+
+        fetchComments({ videoId })
+        fetchVideo({ videoId })
+      }
+    })
+
+    return {
+      comments,
+      info,
+      statistics,
+      fetchComments,
+      fetchVideo,
+      videoId
+    }
+  },
+
+  computed: {
     commentCount(): string {
-      const count = this.statistics.commentCount
+      const count = this.statistics?.commentCount
+
+      if (!count) {
+        return 'No comments'
+      }
 
       return `${this.formatNumber(count)} comment${count > 1 ? 's' : ''}`
     },
 
     viewCount(): string {
-      const count = this.statistics.viewCount
+      const count = this.statistics?.viewCount ?? 0
 
       return `${this.formatNumber(count)} view${count > 1 ? 's' : ''}`
-    },
-
-    videoId() {
-      return this.$route.params.videoId
     }
   },
 
@@ -81,11 +109,6 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapActions('watch', {
-      fetchVideo: 'FETCH_VIDEO',
-      fetchComments: 'FETCH_COMMENTS'
-    }),
-
     formatNumber(value: number): string {
       return numeral(value).format('0,0')
     }

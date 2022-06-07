@@ -1,7 +1,12 @@
 import { defineStore } from 'pinia'
 
 import { getComments, getVideoById } from '@/api'
-import { YTTopLevelComment, YTVideo } from '@/api/types'
+import {
+  YTTopLevelComment,
+  YTVideo,
+  YTVideoInfo,
+  YTVideoStatistics
+} from '@/api/types'
 
 export const useWatchStore = defineStore('watch', {
   state: (): {
@@ -35,7 +40,8 @@ export const useWatchStore = defineStore('watch', {
   },
 
   getters: {
-    info: (state) => (state.video ? state.video.snippet : {}),
-    statistics: (state) => (state.video ? state.video.statistics : {})
+    info: (state): YTVideoInfo | undefined => state.video?.snippet,
+    statistics: (state): YTVideoStatistics | undefined =>
+      state.video?.statistics
   }
 })

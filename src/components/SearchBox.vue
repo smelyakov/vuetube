@@ -13,6 +13,7 @@
         :key="index"
         class="search-box__autocomplete-item"
         :to="{ name: 'watch', params: { videoId: item.id.videoId } }"
+        replace
       >
         <img
           class="search-box__autocomplete-thumb"
