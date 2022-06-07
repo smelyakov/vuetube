@@ -12,25 +12,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed, defineProps } from 'vue'
 
-export default defineComponent({
-  name: 'Player',
-
-  props: {
-    videoId: {
-      type: String,
-      required: true
-    }
-  },
-
-  computed: {
-    videoSrc(): string {
-      return `https://www.youtube.com/embed/${this.videoId}?autoplay=1&rel=0`
-    }
+const props = defineProps({
+  videoId: {
+    type: String,
+    required: true
   }
 })
+
+const videoSrc = computed(
+  () => `https://www.youtube.com/embed/${props.videoId}?autoplay=1&rel=0`
+)
 </script>
 
 <style lang="scss">
