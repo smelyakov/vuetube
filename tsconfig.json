@@ -6,6 +6,7 @@
     "strict": true,
     "jsx": "preserve",
     "moduleResolution": "node",
+    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": [
