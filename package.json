@@ -19,7 +19,7 @@
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
-    "@pinia/testing": "^0.0.12",
+    "@pinia/testing": "^0.1.0",
     "@types/jest": "^27.5.2",
     "@types/numeral": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
